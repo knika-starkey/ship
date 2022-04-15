@@ -70,4 +70,7 @@ function reverse() {
   stop();
   timer = setInterval(drawFrame, 20, -speed);
 }
-function setSpeed() {}
+function setSpeed() {
+  speed = Number(document.getElementById("speed").value);
+  //console.log(document.getElementById("speed").value);
+}
