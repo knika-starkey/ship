@@ -2,16 +2,19 @@ var canvas;
 var context;
 var squarePosition_x = 10;
 var squarePosition_y = 100;
+let timer;
+let speed = 1;
 
 window.onload = function () {
   // Определение контекста рисования
   canvas = document.getElementById("ship");
   context = canvas.getContext("2d");
   // Обновляем холст через 0.02 секунды
-  setTimeout("drawFrame()", 20);
+  //setTimeout("drawFrame()", 20);
+  drawFrame();
 };
 
-function drawFrame() {
+function drawFrame(speed = 1) {
   // Очистить холст
   context.clearRect(0, 0, canvas.width, canvas.height);
   // Вызываем метод beginPath(), чтобы убедиться,
@@ -46,12 +49,25 @@ function drawFrame() {
   context.fillRect(squarePosition_x + 40, 5, 20, 10);
   // Пишем название
   context.fillStyle = "#00f";
-  context.font = "italic 20px sans-serif";
+  context.font = "italic 14px sans-serif";
   context.textBaseline = "top";
-  context.fillText("Беда", squarePosition_x + 25, 75);
+  context.fillText("поБЕДА", squarePosition_x + 25, 75);
   // Перемещаем квадратик вниз на 1 пиксел (где он будет
   // прорисован в следующем кадре)
-  squarePosition_x += 1;
+  squarePosition_x += speed;
   // Рисуем следующий кадр через 20 миллисекунд
-  setTimeout("drawFrame()", 20);
+  //setTimeout("drawFrame()", 20);
 }
+function start() {
+  stop();
+  timer = setInterval(drawFrame, 20, speed);
+}
+function stop() {
+  clearInterval(timer);
+}
+
+function reverse() {
+  stop();
+  timer = setInterval(drawFrame, 20, -speed);
+}
+function setSpeed() {}
