@@ -14,7 +14,7 @@ window.onload = function () {
   drawFrame();
 };
 
-function drawFrame(speed = 1) {
+function drawFrame(speed = 1, side) {
   // Очистить холст
   context.clearRect(0, 0, canvas.width, canvas.height);
   // Вызываем метод beginPath(), чтобы убедиться,
@@ -25,33 +25,65 @@ function drawFrame(speed = 1) {
   // context.lineStyle = "#109bfc";
   // context.lineWidth = 1;
   // context.stroke();
-  // Рисуем парус
-  context.beginPath();
-  context.fillStyle = "#fc0";
-  context.moveTo(squarePosition_x + 20, 70);
-  context.lineTo(squarePosition_x + 60, 20);
-  context.lineTo(squarePosition_x + 60, 70);
-  context.fill();
-  context.beginPath();
-  context.fillStyle = "#ccf";
-  context.moveTo(squarePosition_x, 70);
-  context.lineTo(squarePosition_x + 30, 100);
-  context.lineTo(squarePosition_x + 70, 100);
-  context.lineTo(squarePosition_x + 100, 70);
-  context.fill();
-  // Рисуем мачту
-  context.beginPath();
-  context.fillStyle = "#a60";
-  context.fillRect(squarePosition_x + 60, 5, 5, 65);
-  // Рисуем флаг
-  context.beginPath();
-  context.fillStyle = "#e49";
-  context.fillRect(squarePosition_x + 40, 5, 20, 10);
-  // Пишем название
-  context.fillStyle = "#00f";
-  context.font = "italic 14px sans-serif";
-  context.textBaseline = "top";
-  context.fillText("поБЕДА", squarePosition_x + 25, 75);
+
+  if (side) {
+    // Рисуем парус
+    context.beginPath();
+    context.fillStyle = "#fc0";
+    context.moveTo(squarePosition_x + 20, 70);
+    context.lineTo(squarePosition_x + 60, 20);
+    context.lineTo(squarePosition_x + 60, 70);
+    context.fill();
+    context.beginPath();
+    context.fillStyle = "#ccf";
+    context.moveTo(squarePosition_x, 70);
+    context.lineTo(squarePosition_x + 30, 100);
+    context.lineTo(squarePosition_x + 70, 100);
+    context.lineTo(squarePosition_x + 100, 70);
+    context.fill();
+    // Рисуем мачту
+    context.beginPath();
+    context.fillStyle = "#a60";
+    context.fillRect(squarePosition_x + 60, 5, 5, 65);
+    // Рисуем флаг
+    context.beginPath();
+    context.fillStyle = "#e49";
+    context.fillRect(squarePosition_x + 40, 5, 20, 10);
+    // Пишем название
+    context.fillStyle = "#00f";
+    context.font = "italic 14px sans-serif";
+    context.textBaseline = "top";
+    context.fillText("поБЕДА", squarePosition_x + 25, 75);
+  } else {
+    // Рисуем парус
+    context.beginPath();
+    context.fillStyle = "#fc0";
+    context.moveTo(squarePosition_x + 80, 70);
+    context.lineTo(squarePosition_x + 35, 20);
+    context.lineTo(squarePosition_x + 35, 70);
+    context.fill();
+    context.beginPath();
+    context.fillStyle = "#ccf";
+    context.moveTo(squarePosition_x, 70);
+    context.lineTo(squarePosition_x + 30, 100);
+    context.lineTo(squarePosition_x + 70, 100);
+    context.lineTo(squarePosition_x + 100, 70);
+    context.fill();
+    // Рисуем мачту
+    context.beginPath();
+    context.fillStyle = "#a60";
+    context.fillRect(squarePosition_x + 30, 5, 5, 65);
+    // Рисуем флаг
+    context.beginPath();
+    context.fillStyle = "#e49";
+    context.fillRect(squarePosition_x + 60, 5, 20, 10);
+    // Пишем название
+    context.fillStyle = "#00f";
+    context.font = "italic 14px sans-serif";
+    context.textBaseline = "top";
+    context.fillText("поБЕДА", squarePosition_x + 25, 75);
+  }
+
   // Перемещаем квадратик вниз на 1 пиксел (где он будет
   // прорисован в следующем кадре)
   squarePosition_x += speed;
@@ -60,7 +92,7 @@ function drawFrame(speed = 1) {
 }
 function start() {
   stop();
-  timer = setInterval(drawFrame, 20, speed);
+  timer = setInterval(drawFrame, 20, speed, true);
 }
 function stop() {
   clearInterval(timer);
@@ -68,7 +100,7 @@ function stop() {
 
 function reverse() {
   stop();
-  timer = setInterval(drawFrame, 20, -speed);
+  timer = setInterval(drawFrame, 20, -speed, false);
 }
 function setSpeed() {
   speed = Number(document.getElementById("speed").value);
