@@ -76,7 +76,7 @@ function drawFrame(speed = 1, side) {
     // Рисуем флаг
     context.beginPath();
     context.fillStyle = "#e49";
-    context.fillRect(squarePosition_x + 60, 5, 20, 10);
+    context.fillRect(squarePosition_x + 35, 5, 20, 10);
     // Пишем название
     context.fillStyle = "#00f";
     context.font = "italic 14px sans-serif";
