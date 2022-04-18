@@ -87,6 +87,13 @@ function drawFrame(speed = 1, side) {
   // Перемещаем квадратик вниз на 1 пиксел (где он будет
   // прорисован в следующем кадре)
   squarePosition_x += speed;
+  if (squarePosition_x <= 0) {
+    squarePosition_x = 0;
+    stop();
+  } else if (squarePosition_x + 100 >= canvas.width) {
+    squarePosition_x = canvas.width - 100;
+    stop();
+  }
   // Рисуем следующий кадр через 20 миллисекунд
   //setTimeout("drawFrame()", 20);
 }
