@@ -1,9 +1,10 @@
 var canvas;
 var context;
 var squarePosition_x = 10;
-var squarePosition_y = 100;
+var squarePosition_y = 10;
 let timer;
 let speed = 1;
+let down = false;
 
 window.onload = function () {
   // Определение контекста рисования
@@ -30,70 +31,75 @@ function drawFrame(speed = 1, side) {
     // Рисуем парус
     context.beginPath();
     context.fillStyle = "#fc0";
-    context.moveTo(squarePosition_x + 20, 70);
-    context.lineTo(squarePosition_x + 60, 20);
-    context.lineTo(squarePosition_x + 60, 70);
+    context.moveTo(squarePosition_x + 20, squarePosition_y + 70);
+    context.lineTo(squarePosition_x + 60, squarePosition_y + 20);
+    context.lineTo(squarePosition_x + 60, squarePosition_y + 70);
     context.fill();
     context.beginPath();
     context.fillStyle = "#ccf";
-    context.moveTo(squarePosition_x, 70);
-    context.lineTo(squarePosition_x + 30, 100);
-    context.lineTo(squarePosition_x + 70, 100);
-    context.lineTo(squarePosition_x + 100, 70);
+    context.moveTo(squarePosition_x, squarePosition_y + 70);
+    context.lineTo(squarePosition_x + 30, squarePosition_y + 100);
+    context.lineTo(squarePosition_x + 70, squarePosition_y + 100);
+    context.lineTo(squarePosition_x + 100, squarePosition_y + 70);
     context.fill();
     // Рисуем мачту
     context.beginPath();
     context.fillStyle = "#a60";
-    context.fillRect(squarePosition_x + 60, 5, 5, 65);
+    context.fillRect(squarePosition_x + 60, squarePosition_y + 5, 5, 65);
     // Рисуем флаг
     context.beginPath();
     context.fillStyle = "#e49";
-    context.fillRect(squarePosition_x + 40, 5, 20, 10);
+    context.fillRect(squarePosition_x + 40, squarePosition_y + 5, 20, 10);
     // Пишем название
     context.fillStyle = "#00f";
     context.font = "italic 14px sans-serif";
     context.textBaseline = "top";
-    context.fillText("поБЕДА", squarePosition_x + 25, 75);
+    context.fillText("поБЕДА", squarePosition_x + 25, squarePosition_y + 75);
   } else {
     // Рисуем парус
     context.beginPath();
     context.fillStyle = "#fc0";
-    context.moveTo(squarePosition_x + 80, 70);
-    context.lineTo(squarePosition_x + 35, 20);
-    context.lineTo(squarePosition_x + 35, 70);
+    context.moveTo(squarePosition_x + 80, squarePosition_y + 70);
+    context.lineTo(squarePosition_x + 35, squarePosition_y + 20);
+    context.lineTo(squarePosition_x + 35, squarePosition_y + 70);
     context.fill();
     context.beginPath();
     context.fillStyle = "#ccf";
-    context.moveTo(squarePosition_x, 70);
-    context.lineTo(squarePosition_x + 30, 100);
-    context.lineTo(squarePosition_x + 70, 100);
-    context.lineTo(squarePosition_x + 100, 70);
+    context.moveTo(squarePosition_x, squarePosition_y + 70);
+    context.lineTo(squarePosition_x + 30, squarePosition_y + 100);
+    context.lineTo(squarePosition_x + 70, squarePosition_y + 100);
+    context.lineTo(squarePosition_x + 100, squarePosition_y + 70);
     context.fill();
     // Рисуем мачту
     context.beginPath();
     context.fillStyle = "#a60";
-    context.fillRect(squarePosition_x + 30, 5, 5, 65);
+    context.fillRect(squarePosition_x + 30, squarePosition_y + 5, 5, 65);
     // Рисуем флаг
     context.beginPath();
     context.fillStyle = "#e49";
-    context.fillRect(squarePosition_x + 35, 5, 20, 10);
+    context.fillRect(squarePosition_x + 35, squarePosition_y + 5, 20, 10);
     // Пишем название
     context.fillStyle = "#00f";
     context.font = "italic 14px sans-serif";
     context.textBaseline = "top";
-    context.fillText("поБЕДА", squarePosition_x + 25, 75);
+    context.fillText("поБЕДА", squarePosition_x + 25, squarePosition_y + 75);
   }
 
   // Перемещаем квадратик вниз на 1 пиксел (где он будет
   // прорисован в следующем кадре)
-  squarePosition_x += speed;
-  if (squarePosition_x <= 0) {
-    squarePosition_x = 0;
-    stop();
-  } else if (squarePosition_x + 100 >= canvas.width) {
-    squarePosition_x = canvas.width - 100;
-    stop();
+  if (down) {
+    squarePosition_y += 1;
+  } else {
+    squarePosition_x += speed;
+    if (squarePosition_x <= 0) {
+      squarePosition_x = 0;
+      stop();
+    } else if (squarePosition_x + 100 >= canvas.width) {
+      squarePosition_x = canvas.width - 100;
+      stop();
+    }
   }
+
   // Рисуем следующий кадр через 20 миллисекунд
   //setTimeout("drawFrame()", 20);
 }
@@ -112,4 +118,7 @@ function reverse() {
 function setSpeed() {
   speed = Number(document.getElementById("speed").value);
   //console.log(document.getElementById("speed").value);
+}
+function drown() {
+  down = true;
 }
